@@ -75,7 +75,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="20dp"
             android:backgroundTint="#CB584C"
-            android:text="Calcular" />
+            android:text="Calcular"
+            android:onClick="onClickBtCalcular"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
