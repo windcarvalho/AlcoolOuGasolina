@@ -12,6 +12,9 @@
         android:theme="@style/Theme.AlcoolOuGasolina"
         tools:targetApi="28">
         <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
