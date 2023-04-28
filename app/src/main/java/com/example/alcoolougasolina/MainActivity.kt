@@ -12,10 +12,14 @@ import com.google.android.material.textfield.TextInputLayout
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
+
     private var percentual: Double = 0.7
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (savedInstanceState != null) {
+            percentual=savedInstanceState.getDouble("percentual")
+
         Log.d("PDM23", "No onCreate, $percentual")
 
         val btCalc: Button = findViewById(R.id.btCalcular)
@@ -45,6 +49,27 @@ class MainActivity : AppCompatActivity() {
           //  Log.d("PDM23", "VALOR DO Percentual $alcoholValue");
             Log.d("PDM23", "No btCalcular, $percentual");
         })
+
+        }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("PDM23", "No onResume, $percentual")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("PDM23", "No onStart")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("PDM23", "No onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("PDM23", "No onStop")
     }
     private fun checkIfIsEmpty(editText: EditText) : Boolean{
         try{
@@ -97,4 +122,14 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         Log.d("PDM23", "No onDestroy")
     }
+     fun onClickBtCalcular(v: View) {
+        //código do evento
+        percentual = 0.75
+        Log.d("PDM23", "No onClik, $percentual")
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putDouble("percentual",percentual)
+        super.onSaveInstanceState(outState)
+    }
 }
+   
