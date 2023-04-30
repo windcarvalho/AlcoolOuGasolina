@@ -20,6 +20,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d("PDM23","No onCreate, $percentual")
         
+        if (savedInstanceState != null){
+            percentual =savedInstanceState.getDouble("percentual");
+        }S
+        //recuperando caso exista
+        
         TextView resultado = (TextView) findViewById(R.id.resultado);
         resultado.setText("$resultadoVal");
         //texto com resultado
@@ -37,14 +42,6 @@ class MainActivity : AppCompatActivity() {
           para poder ser visualizado corretamente.
           Lembrando que a funcao .isChecked() verifica se está ligado ou não
           */
-        swPercentual.setTextOn("75%");
-        swPercentual.setTextOff("70%");
-        //textos para on e off
-        
-        swPercentual.getChecked(true);
-        //setando ele como ligado
-        swPercentual.getChecked(false);
-        //setando ele como desligado
         
         val btCalc: Button = findViewById(R.id.btCalcular)
         btCalc.setOnClickListener(View.OnClickListener {
@@ -52,41 +49,76 @@ class MainActivity : AppCompatActivity() {
             if (swPercentual.isChecked()){
                 percentual=0.75;
                 resDouble = edGasolina/edAlcool;
-                resultadoVal=df.format(resDouble);
-                resultado.setText("$resultadoVal");
-                Log.d("PDM23","No btCalcular, $percentual");
-                Log.d("PDM23","No btCalcular, $resultadoVal");
+                resultadoVal=df.format(resDouble);               
+                Log.d("PDM23","No btCalcular, $percentual, $resultadoVal");
                 }
             else{
                 percentual=0.70;
                 resDouble = edGasolina/edAlcool;
                 resultadoVal=df.format(resDouble);
-                resultado.setText("$resultadoVal");
-                Log.d("PDM23","No btCalcular, $percentual");
-                Log.d("PDM23","No btCalcular, $resultadoVal");
+                Log.d("PDM23","No btCalcular, $percentual, $resultadoVal");
             }
+            if(resDouble>=percentual){
+                    resultado.setText("Escolha gasolina $resultadoVal");
+                }
+                else{
+                    resultado.setText("Escolha alcool $resultadoVal");
+                }
         })
         //termino do botão
         
     }
 override fun onResume(){
     super.onResume()
+    if (savedInstanceState != null){
+        percentual =savedInstanceState.getDouble("percentual");
+    }
+    //recuperando caso exista
     Log.d("PDM23","No onResume, $percentual")
 }
+
 override fun onStart(){
     super.onStart()
-    Log.d("PDM23","No onResume")
+    if (savedInstanceState != null){
+        percentual =savedInstanceState.getDouble("percentual");
+    }
+    //recuperando caso exista
+    Log.d("PDM23","No onStart, $percentual")
 }
+
 override fun onPause(){
     super.onPause()
-    Log.d("PDM23","No onResume")
+    Log.d("PDM23","No onPause, $percentual")
+    if (savedInstanceState != null){
+        percentual =savedInstanceState.getDouble("percentual");
+    }
+    //recuperando caso exista
 }
-override fun onStop(){
-    super.onStop()
-    Log.d("PDM23","No onResume")
+
+override fun onStop(savedInstanceState: Bundle?){
+    super.onDestroy(savedInstanceState: Bundle?)
+    super.onDestroy(savedInstanceState)
+    if (savedInstanceState != null){
+        percentual =savedInstanceState.getDouble("percentual");
+    }
+    //recuperando caso exista
+    Log.d("PDM23","No onStop, $percentual")
 }
+
 override fun onDestroy(){
-    super.onDestroy()
-    Log.d("PDM23","No onResume")
+    super.onDestroy(savedInstanceState: Bundle?)
+    super.onDestroy(savedInstanceState)
+    if (savedInstanceState != null){
+        percentual =savedInstanceState.getDouble("percentual");
+    }
+    //recuperando caso exista
+    Log.d("PDM23","No onDestroy, $percentual")
 }
+
+override fun onSaveInstanceState(outState: Bundle) {
+   outState.putDouble("percentual",percentual)
+   super.onSaveInstanceState(outState)
+}
+//inicializando a função de salvar estados
+
 }
