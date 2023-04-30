@@ -66,7 +66,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginHorizontal="30dp"
-            android:text="75%" />
+            android:checked="false"
+            android:textOff="70%"
+            android:textOn="70%"/>
 
         <Button
             android:id="@+id/btCalcular"
